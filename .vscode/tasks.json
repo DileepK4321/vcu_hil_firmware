@@ -1,0 +1,26 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "Build and Run SIL Tests",
+      "command": "gcc",
+      "args": [
+        "-fdiagnostics-color=always",
+        "-g",
+        "-std=c99",
+        "-Iinc",
+        "-Isrc",
+        "src/vcu_app.c",
+        "test/test_apps_safety.c",
+        "-o",
+        "${workspaceFolder}/test/test_apps_safety"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc"]
+    }
+  ]
+}
