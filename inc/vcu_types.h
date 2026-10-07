@@ -44,6 +44,7 @@ typedef struct {
 
     /* Inverter Telemetry (Received via CAN) */
     float inverter_dc_bus_v;     /* Inverter internal DC-bus voltage */
+    float inverter_temp_c;       /* Power stage temperature (IGBT/SiC) */
     int16_t motor_rpm;           /* Live motor speed */
     bool inverter_heartbeat_rx;  /* Heartbeat flag toggled by CAN RX ISR */
 } vcu_inputs_t;

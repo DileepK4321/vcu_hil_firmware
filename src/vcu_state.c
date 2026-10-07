@@ -1,5 +1,6 @@
 #include "vcu_state.h"
 #include "vcu_app.h"
+#include "vcu_derate.h"
 
 static uint32_t precharge_timer_ticks = 0;
 
@@ -60,7 +61,8 @@ void vcu_state_step(vcu_inputs_t *inputs, vcu_outputs_t *outputs) {
             if (outputs->active_fault_mask != FAULT_NONE) {
                 outputs->current_state = VCU_STATE_FAULT_SHUTDOWN;
             } else {
-                outputs->target_torque_nm = (pedal_pct / 100.0f) * MAX_TORQUE_RATED_NM;
+                float raw_torque_nm = (pedal_pct / 100.0f) * MAX_TORQUE_RATED_NM;
+                outputs->target_torque_nm = vcu_derate_apply(raw_torque_nm, inputs);
             }
             break;
         }
